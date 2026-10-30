@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('vaccine');
             $table->string('dose');
             $table->date('scheduled_at');
-            $table->enum('status', ['Scheduled', 'Done', 'Overdue'])->default('Scheduled');
+            $table->string('status');
             $table->timestamps();
         });
     }
