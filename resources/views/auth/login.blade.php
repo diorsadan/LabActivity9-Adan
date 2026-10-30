@@ -1,3 +1,4 @@
+{{-- Uses the master layout (nav + footer) --}}
 @extends('layouts.app')
 
 @section('title', 'Sign in – Bakuna Tracker')
@@ -11,13 +12,17 @@
                 <p class="text-sm text-slate-500">Access the barangay vaccination records</p>
             </div>
 
+            {{-- Sends to POST /login (AuthController@login) --}}
             <form method="POST" action="{{ url('/login') }}" class="space-y-5">
+                {{-- Hidden CSRF token, without it Laravel returns 419 Page Expired --}}
                 @csrf
 
                 <div>
                     <label for="email" class="mb-1 block text-sm font-medium text-slate-700">Email</label>
+                    {{-- old('email') keeps the typed email after a failed login --}}
                     <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus
                            class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-200">
+                    {{-- Shows the error message for this field, if any --}}
                     @error('email')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror

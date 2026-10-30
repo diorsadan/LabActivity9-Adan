@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Creates the vaccinations table when we run php artisan migrate
         Schema::create('vaccinations', function (Blueprint $table) {
             $table->id();
             $table->string('patient_name');
             $table->string('purok');
             $table->string('vaccine');
-            $table->string('dose');
+            $table->string('dose');            // e.g. 1st dose, Booster
             $table->date('scheduled_at');
-            $table->string('status');
-            $table->timestamps();
+            $table->string('status');          // Scheduled, Done, Overdue
+            $table->timestamps();              // created_at and updated_at
         });
     }
 
@@ -28,6 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Undo: delete the table (used by migrate:rollback / migrate:fresh)
         Schema::dropIfExists('vaccinations');
     }
 };

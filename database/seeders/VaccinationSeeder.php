@@ -12,6 +12,7 @@ class VaccinationSeeder extends Seeder
      */
     public function run(): void
     {
+        // Sample residents: the 5 required vaccines + Hepatitis B, and my birthday row (2026-12-03)
         $rows = [
             ['patient_name' => 'Althea Mae Villanueva', 'purok' => 'Purok Adan', 'vaccine' => 'BCG', 'dose' => '1st dose', 'scheduled_at' => '2026-09-15', 'status' => 'Done'],
             ['patient_name' => 'Rhed Bautista', 'purok' => 'Purok Sampaguita', 'vaccine' => 'Pentavalent', 'dose' => '2nd dose', 'scheduled_at' => '2026-10-05', 'status' => 'Overdue'],
@@ -23,6 +24,7 @@ class VaccinationSeeder extends Seeder
             ['patient_name' => 'Corazon Pabillore', 'purok' => 'Purok Sampaguita', 'vaccine' => 'Anti-Flu', 'dose' => 'Annual', 'scheduled_at' => '2026-10-01', 'status' => 'Done'],
         ];
 
+        // Insert each row (works because the columns are in $fillable)
         foreach ($rows as $row) {
             Vaccination::create($row);
         }

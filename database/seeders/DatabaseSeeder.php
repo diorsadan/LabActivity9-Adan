@@ -16,12 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // My login account, password is hashed so Auth::attempt can check it
         User::create([
             'name' => 'Dion',
             'email' => 'nurse.adan@bakuna.test',
             'password' => Hash::make('bakuna2026'),
         ]);
 
+        // Run the vaccination seeder too
         $this->call([VaccinationSeeder::class]);
     }
 }

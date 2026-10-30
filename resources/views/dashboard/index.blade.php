@@ -1,10 +1,12 @@
 @extends('layouts.app')
 
+{{-- $title comes from DashboardController@index --}}
 @section('title', $title)
 
 @section('content')
     <h1 class="mb-6 text-2xl font-bold text-teal-800 md:text-3xl">{{ $title }}</h1>
 
+    {{-- Alert banner: overdue first, then out of stock, else all clear --}}
     @if ($alerts->count() > 0)
         <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-red-700">
             <strong>Attention:</strong> {{ $alerts->count() }} resident(s) have overdue vaccinations.
@@ -19,7 +21,9 @@
         </div>
     @endif
 
+    {{-- 1 column on mobile, 4 columns on md screens and up --}}
     <div class="grid gap-4 md:grid-cols-4">
+        {{-- One stat card per item in $stats --}}
         @foreach ($stats as $label => $value)
             <x-stat-card :title="$label" :value="$value" />
         @endforeach
@@ -27,6 +31,7 @@
 
     <x-panel title="Upcoming Schedules" class="mt-8">
         <ul class="divide-y divide-slate-100">
+            {{-- Only the rows that are still Scheduled --}}
             @forelse ($schedules->where('status', 'Scheduled') as $row)
                 <li class="flex flex-col gap-1 py-3 md:flex-row md:items-center md:justify-between">
                     <div>
